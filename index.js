@@ -47,6 +47,24 @@ app.post('/sendMessage', async function (req, res) {
 })
 })
 
+app.post('/sendTest', async function (req, res) {
+    const { Message} = req.body.data
+
+    const info = await transporter.sendMail({
+        from: 'Portfolio form',
+        to: 'itdevreact@gmail.com',
+        subject: "Potential vacancy",
+        html: `<b>Message from portfolio</b>
+   
+   <div>
+     Message: ${Message}
+   </div>
+`
+    })
+    res.send({message: `Yor message has been Received. Number: ${Message}`
+    })
+})
+
 const port = process.env.PORT || 4000
 
 app.listen(port, function () {
